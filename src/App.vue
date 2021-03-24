@@ -1,22 +1,25 @@
 <template>
   <div id="app">
-    <Header />
-    <HelloWorld msg="Hoc viec"/>
-    <ItemCarousel/>
+    <!-- <Header />
+    <HelloWorld msg="Hoc viec"/> -->
+    <Body />
+    
   </div>
 
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Header from './components/Header'
-import ItemCarousel from './components/Carousel'
+// import HelloWorld from './components/HelloWorld.vue'
+// import Header from './components/Header'
+import Body from './components/Body'
+
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    Header,
-    ItemCarousel
+    // HelloWorld,
+    // Header,
+    Body,
+    
   }
 }
 </script>
@@ -29,5 +32,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#carousel {
+  width: 900px;
+  margin: 0 auto;
 }
 </style>
