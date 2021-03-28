@@ -1,6 +1,5 @@
 <template>
     <div class="scrolling-component" ref="scrollComponent">
-        Need to fix the :key attribute as there are dupplicated key
         <PostComponent v-for="post in posts" 
         :post="post" :key="post"/>
     </div>
