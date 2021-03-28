@@ -3,6 +3,7 @@
     <Header />
     <HelloWorld msg="Hoc viec"/>
     <ItemCarousel/>
+    <ListComponent/>
   </div>
 
 </template>
@@ -11,12 +12,14 @@
 import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header'
 import ItemCarousel from './components/Carousel'
+import ListComponent from "./components/ListComponent"
 export default {
   name: 'App',
   components: {
     HelloWorld,
     Header,
-    ItemCarousel
+    ItemCarousel,
+    ListComponent
   }
 }
 </script>
