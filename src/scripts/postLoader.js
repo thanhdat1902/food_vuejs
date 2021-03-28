@@ -16,4 +16,4 @@ const getPosts = (number) => {
 	return ret
 }
 
-export default getPosts
+export default getPosts	
