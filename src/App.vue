@@ -19,7 +19,7 @@ export default {
     // HelloWorld,
     // Header,
     Body,
-    
+    ListComponent
   }
 }
 </script>
