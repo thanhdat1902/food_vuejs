@@ -1,7 +1,7 @@
 <template>
     <div class="scrolling-component" ref="scrollComponent">
-        <PostComponent v-for="post in posts" 
-        :post="post" :key="post"/>
+        <PostComponent v-for="(post,idx) in posts" 
+        :post="post" :key="idx" />
     </div>
 </template>
 

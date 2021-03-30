@@ -2,10 +2,8 @@
 <div>
     <!-- navigationNextLabel là button next, tìm cách thêm vào component vào chỗ này -->
     <carousel 
-    perPage="8.5"
+    :perPage="8.5"
     :navigationEnabled="true"
-    :navigationNextLabel="next"
-    :navigationPrevLabel="prev"
     :paginationEnabled="false"
     :speed=700
     >
@@ -41,10 +39,17 @@ import { Carousel, Slide } from 'vue-carousel';
 import Button from '../share/components/Button';
 export default {
     name:"ItemCarousel",
+    
     components: {
         Carousel,
         Slide,
         Button
+    },
+    methods : {
+        // next () {
+        // },
+        // prev () {
+        // },
     }
 }
 </script>

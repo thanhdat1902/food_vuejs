@@ -6,8 +6,8 @@
         <button class="button button--normal">Pickup</button>
         <button class="button button--normal button--rating">Over 4.5 ★ 
             <div class="button__divide"></div>
-            <button v-on:click="displayRating('menu-rating--header')" class="button button--dropdown">v</button>
-            <div class="menu-rating menu-rating--header">
+            <button v-on:click="displayRating(0)" class="button button--dropdown">v</button>
+            <div class="menu-rating menu-rating--header" v-if="subrating[0]">
                 <div class="menu-rating__score">
                     <span class="menu-rating__tag">4.5</span>
                     <div class="menu-rating__score-cap">
@@ -25,8 +25,8 @@
         <button class="button button--normal">Vegetarian</button>
         <button class="button button--normal button--price">$,$$ 
             <div class="button__divide"></div>
-            <button v-on:click="displayPrice('menu-price--header')" class="button button--dropdown">v</button>
-            <div class="menu-price menu-price--header">
+            <button v-on:click="displayRating(1)" class="button button--dropdown">v</button>
+            <div class="menu-price menu-price--header" v-if="subrating[1]">
                 <span class="menu-price__tag">Menu price</span>
                 <div class="menu-price__price-range">
                     <button v-on:click="togglePrice" class="button--price-range button--price-range-selected">$</button>
@@ -168,8 +168,8 @@
                         <button class="button button--normal">Pickup</button>
                         <button class="button button--normal button--rating">Over 4.5 ★
                             <div class="button__divide"></div>
-                            <button v-on:click="displayRating('menu-rating--sidebar')" class="button button--dropdown">v</button>
-                            <div class="menu-rating menu-rating--sidebar">
+                            <button v-on:click="displayRating(2)" class="button button--dropdown" >v</button>
+                            <div class="menu-rating menu-rating--sidebar" v-if="subrating[2]">
                                 <div class="menu-rating__score">
                                 <span class="menu-rating__tag">4.5</span>
                                 <div class="menu-rating__score-cap">
@@ -187,8 +187,8 @@
                         <button class="button button--normal">Vegetarian</button>
                         <button class="button button--normal button--price">$,$$
                             <div class="button__divide"></div>
-                            <button v-on:click="displayPrice('menu-price--sidebar')" class="button button--dropdown">v</button>
-                            <div class="menu-price menu-price--sidebar">
+                            <button v-on:click="displayRating(3)" class="button button--dropdown">v</button>
+                            <div class="menu-price menu-price--sidebar" v-if="subrating[3]">
                                 <span class="menu-price__tag">Menu price</span>
                                 <div class="menu-price__price-range">
                                     <button v-on:click="togglePrice" class="button--price-range button--price-range-selected">$</button>
@@ -221,10 +221,16 @@ import ListComponent from "./ListComponent.vue"
 export default {
   name: 'Body',
   components: {
-    StyledInfinityList,
     ItemCarousel,
     ListComponent
   },
+  data: 
+    () => {
+        return {
+            subrating: [false, false,false,false]
+
+        }
+    },
   methods: {
     seeMore: function(){
         let myBtn = document.getElementsByClassName("button--see-more")[0];
@@ -243,21 +249,9 @@ export default {
             myBtn.textContent = "See Less ^";
         }
     },
-    displayRating: function(tag){
-        let object = document.getElementsByClassName(tag)[0];
-        let display = window.getComputedStyle(object).display;
-        if (display === "none")
-            object.style.display = "flex";
-        else
-            object.style.display = "none";
-    },
-    displayPrice: function(tag){
-        let object = document.getElementsByClassName(tag)[0];
-        let display = window.getComputedStyle(object).display;
-        if (display === "none") 
-            object.style.display = "flex";
-        else
-            object.style.display = "none";
+    displayRating: function(idx){
+        this.subrating[idx] = !this.subrating[idx];
+        this.subrating = [...this.subrating]
     },
     togglePrice: function(){
         let object = event.target;
@@ -411,7 +405,6 @@ p {
     box-shadow: 0 0 8px 2px #d3d3d3;
     z-index: 2;
     box-sizing: border-box;
-    display: none;
     flex-direction: column;
     white-space: nowrap;
     text-align: start;
@@ -467,7 +460,6 @@ p {
     box-shadow: 0 0 8px 2px #d3d3d3;
     z-index: 2;
     box-sizing: border-box;
-    display: none;
     flex-direction: column;
     white-space: nowrap;
     text-align: start;
@@ -478,6 +470,7 @@ p {
     left: -5px;
 }
 .menu-price--sidebar {
+    display: flex;
     bottom: 32px;
     left: -5px;
 }
