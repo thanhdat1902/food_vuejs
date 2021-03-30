@@ -19,7 +19,6 @@ export default {
     // HelloWorld,
     // Header,
     Body,
-    
   }
 }
 </script>
