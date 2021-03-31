@@ -249,10 +249,13 @@ export default {
         }
     },
     displayRating: function(idx){
-        this.subrating[idx] = !this.subrating[idx];
-        this.subrating = this.subrating.map((item, index)=> {
-            return index=== idx
+        this.subrating = this.subrating.map((item,index)=> {
+            if(index!=idx) {
+                return false;
+            }
+            return !item
         })
+        console.log(this.subrating)
     },
     togglePrice: function(){
         let object = event.target;
