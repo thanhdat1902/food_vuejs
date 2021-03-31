@@ -228,7 +228,6 @@ export default {
     () => {
         return {
             subrating: [false, false,false,false]
-
         }
     },
   methods: {
@@ -251,7 +250,9 @@ export default {
     },
     displayRating: function(idx){
         this.subrating[idx] = !this.subrating[idx];
-        this.subrating = [...this.subrating]
+        this.subrating = this.subrating.map((item, index)=> {
+            return index=== idx
+        })
     },
     togglePrice: function(){
         let object = event.target;
