@@ -1,10 +1,10 @@
 <template>
   <div id="header" >
-    <div class="header__container">
-      <div class="nav-container">
-      <!-- Begin nav -->
-        <div class="nav">
-          <ul class="nav__list">
+    <div class=" nav--max-height header__container">
+      <div class="nav--max-height nav-container">
+      <!-- Begin nav-list -->
+        <div class="nav--max-height nav">
+          <ul class="nav--max-height nav__list">
             <li >
               <a href="#">
                 Home
@@ -54,13 +54,13 @@
             <li><a href="#">Contact</a></li>
           </ul>
         </div>
-        <!-- End nav -->
+        <!-- End nav-list -->
         <div class="nav-container__image">
           <a href="#">
             <img src="../assets/headerImg/logo.png" alt="Hamburger">
           </a>
         </div>
-        <div class="nav__order">
+        <div class="nav--max-height nav__order">
           <div class="nav__order-button">
             <a href="#">Order online</a>
           </div>
@@ -85,8 +85,38 @@
 </template>
 
 <script>
+import {onMounted, onUnmounted} from "@vue/composition-api"
 export default {
-  name: 'Header'
+  name: 'Header',
+  setup(){
+    const handleSrcoll = () =>{
+      let object = document.getElementsByClassName("nav--max-height");
+      let container = document.querySelector(".header__container");
+      let banner = document.querySelector(".header__banner-area");
+      let top = window.scrollY;
+      if(top > 250){
+        object.forEach(navElement => {
+          navElement.style.maxHeight = "100px";
+        })
+        container.style.position = "fixed";
+        container.style.backgroundColor = "#000";
+        banner.style.paddingTop = "140px";
+        banner.style.minHeight = "540px";
+      }
+    }
+
+  onMounted (() => {
+    window.addEventListener('scroll', handleSrcoll);
+  })
+
+  onUnmounted (() => {
+    window.removeEventListener('scroll', handleSrcoll);
+  })
+  },
+  methods: {
+
+
+  }
 }
 </script>
 
@@ -105,6 +135,10 @@ html{
   font-size: 16px;
 }
 
+.nav--max-height{
+  max-height: 140px;
+} 
+
 #header{  
   background-image: url("../assets/headerImg/background.png");
   background-size: cover;
@@ -115,6 +149,26 @@ html{
   width: 100%;
 }
 
+#header .header__container{
+  position: relative;
+  min-width: 100%;
+  z-index: 1000;
+}
+
+#header .header__container::after{
+  position: absolute;
+  content: "";
+  width: calc(50% - 585.5px + 1em);
+  height: 48px;
+  background-color: #e7272d;
+  right: 0;
+  border-right: 0 solid transparent;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* Start  nav-container*/
 #header .nav-container{
   display: flex;
   flex-wrap: wrap;
@@ -124,24 +178,17 @@ html{
   position: relative;
 }
 
+/* Start nav-list */
 .nav{
-  align-self: center!important;
   max-width: 41.666667%;
+  display: flex;
 }
 
 .nav .nav__list{
   display: inline-block;
   padding: 0px 15px;
   list-style-type: none;
-  height: 120px;
   display: flex;
-}
-
-
-
-
-.nav__list .nav__subnav{
-  display: none;
 }
 
 
@@ -187,6 +234,10 @@ html{
 }
 
 /* Start subnav */
+.nav__list .nav__subnav{
+  display: none;
+}
+
 .nav__list li:hover a
 ,.nav__list > li:hover > .nav__subnav > li:hover > a
 ,.nav__subnav li:hover .blog-subnav li:hover a{
@@ -224,12 +275,14 @@ html{
 .nav__list .nav__subnav li:first-child > a{
   border-top: none;
 }
+/* End sub-nav */
 
+
+/*Start blog-subnav */
 .nav__list li:hover .blog-subnav{
   display: none;
 }
 
-/* Blog subnav */
 .nav__subnav--relative{
   position: relative;
 }
@@ -248,14 +301,24 @@ html{
   margin-left: 160px;
   margin-right: -10px;
 }
+/*End blog-subnav */
 
-/* Image */
+/* End nav-list */
+
+/* Start nav-image */
 #header .nav-container .nav-container__image{
   text-align: center;
-  margin-left: 20px;
+  margin-left: 32px;
+}
+/* End nav-image */
+
+/*Start nav-order */
+#header .nav__order .nav__order-sidebar,
+#header .nav__order .nav__order-cart{
+  align-self: center;
+  position: relative;
 }
 
-/* Order */
 #header .nav__order{
   display: flex;
   justify-content: space-between;
@@ -263,6 +326,7 @@ html{
   max-width: 41.666667%;
 }
 
+/* Start order-button */
 #header .nav__order .nav__order-button{
   align-self: center;
   margin-left: 10rem;
@@ -287,12 +351,9 @@ html{
   border: 1px solid #ffc107;
 }
 
-#header .nav__order .nav__order-sidebar,
-#header .nav__order .nav__order-cart{
-  align-self: center;
-  position: relative;
-}
+/* End order-button */
 
+/* Start order-cart */
 #header .nav__order .nav__order-cart a{
   font-size: 14px;
   font-weight: 700;
@@ -313,6 +374,9 @@ html{
   padding: 2px 5px;
   border-radius: 50%;
 }
+/* End order-cart */
+
+/* Start order-sidebar */
 
 #header .nav__order .nav__order-sidebar i{
   padding-left: 25px;
@@ -326,32 +390,25 @@ html{
   right: 0;
 }
 
-#header .header__container{
-  position: relative;
-}
+/* End order-sidebar */
 
-#header .header__container::after{
-  position: absolute;
-  content: "";
-  width: calc(50% - 585.5px + 1em);
-  height: 48px;
-  background-color: #e7272d;
-  right: 0;
-  border-right: 0 solid transparent;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-}
+/* End nav-container */
 
+/* Start banner */
 #header .header__banner-area{
-  margin-top: 8%;
+  min-height: 400px;
+  display: flex;
+  align-content:  center;
 }
 
 #header .header__banner{
-    color: #fff;
-    font-size: 80px;
-    line-height: 90px;
-    font-weight: 900;
+  color: #fff;
+  font-size: 80px;
+  line-height: 90px;
+  font-weight: 900;
+  align-self: center;
+  width: 100%;
 }
+/* End banner */
 
 </style>
