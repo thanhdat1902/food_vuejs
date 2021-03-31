@@ -6,8 +6,8 @@
         <button class="button button--normal">Pickup</button>
         <button class="button button--normal button--rating">Over 4.5 ★ 
             <div class="button__divide"></div>
-            <button v-on:click="displayRating('menu-rating--header')" class="button button--dropdown">v</button>
-            <div class="menu-rating menu-rating--header">
+            <button v-on:click="displayRating(0)" class="button button--dropdown">v</button>
+            <div class="menu-rating menu-rating--header" v-if="subrating[0]">
                 <div class="menu-rating__score">
                     <span class="menu-rating__tag">4.5</span>
                     <div class="menu-rating__score-cap">
@@ -25,14 +25,14 @@
         <button class="button button--normal">Vegetarian</button>
         <button class="button button--normal button--price">$,$$ 
             <div class="button__divide"></div>
-            <button v-on:click="displayPrice('menu-price--header')" class="button button--dropdown">v</button>
-            <div class="menu-price menu-price--header">
+            <button v-on:click="displayRating(1)" class="button button--dropdown">v</button>
+            <div class="menu-price menu-price--header" v-if="subrating[1]">
                 <span class="menu-price__tag">Menu price</span>
                 <div class="menu-price__price-range">
-                    <button v-on:click="togglePrice" class="button--price-range button--price-range-selected">$</button>
-                    <button v-on:click="togglePrice" class="button--price-range button--price-range-selected">$$</button>
-                    <button v-on:click="togglePrice" class="button--price-range">$$$</button>
-                    <button v-on:click="togglePrice" class="button--price-range">$$$$</button>
+                    <button v-on:click="togglePrice(0)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[0] }">$</button>
+                    <button v-on:click="togglePrice(1)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[1] }">$$</button>
+                    <button v-on:click="togglePrice(2)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[2] }">$$$</button>
+                    <button v-on:click="togglePrice(3)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[3] }">$$$$</button>
                 </div>
                 <div class="menu-price__button">
                     <button class="button button--normal button--cancel">Cancel</button>
@@ -123,44 +123,44 @@
                             </div>
                         </a>
                         <a class="food-icon food-icon--see-more" href="#">
-                            <div>
+                            <div v-if="displayIcon[0]">
                                 <img class="food-icon__img" src="https://cdn.iconscout.com/icon/free/png-256/fast-food-1851561-1569286.png"/>
                                 <p class="food-icon__name">Sample</p>
                             </div>
                         </a>
                         <a class="food-icon food-icon--see-more" href="#">
-                            <div>
+                            <div v-if="displayIcon[1]">
                                 <img class="food-icon__img" src="https://cdn.iconscout.com/icon/free/png-256/fast-food-1851561-1569286.png"/>
                                 <p class="food-icon__name">Sample</p>
                             </div>
                         </a>
                         <a class="food-icon food-icon--see-more" href="#">
-                            <div>
+                            <div v-if="displayIcon[2]">
                                 <img class="food-icon__img" src="https://cdn.iconscout.com/icon/free/png-256/fast-food-1851561-1569286.png"/>
                                 <p class="food-icon__name">Sample</p>
                             </div>
                         </a>
                         <a class="food-icon food-icon--see-more" href="#">
-                            <div>
+                            <div v-if="displayIcon[3]">
                                 <img class="food-icon__img" src="https://cdn.iconscout.com/icon/free/png-256/fast-food-1851561-1569286.png"/>
                                 <p class="food-icon__name">Sample</p>
                             </div>
                         </a>
                         <a class="food-icon food-icon--see-more" href="#">
-                            <div>
+                            <div v-if="displayIcon[4]">
                                 <img class="food-icon__img" src="https://cdn.iconscout.com/icon/free/png-256/fast-food-1851561-1569286.png"/>
                                 <p class="food-icon__name">Sample</p>
                             </div>
                         </a>
                         <a class="food-icon food-icon--see-more" href="#">
-                            <div>
+                            <div v-if="displayIcon[5]">
                                 <img class="food-icon__img" src="https://cdn.iconscout.com/icon/free/png-256/fast-food-1851561-1569286.png"/>
                                 <p class="food-icon__name">Sample</p>
                             </div>
                         </a>
                     </div>
                     <div class="sidebar__see-more">
-                        <button v-on:click="seeMore" class="button button--normal button--see-more">See All v</button>
+                        <button v-on:click="seeMore" class="button button--normal button--see-more">{{seeMoreText ? 'See All v' : 'See Less ^'}}</button>
                     </div>
                     
 
@@ -168,8 +168,8 @@
                         <button class="button button--normal">Pickup</button>
                         <button class="button button--normal button--rating">Over 4.5 ★
                             <div class="button__divide"></div>
-                            <button v-on:click="displayRating('menu-rating--sidebar')" class="button button--dropdown">v</button>
-                            <div class="menu-rating menu-rating--sidebar">
+                            <button v-on:click="displayRating(2)" class="button button--dropdown" >v</button>
+                            <div class="menu-rating menu-rating--sidebar" v-if="subrating[2]">
                                 <div class="menu-rating__score">
                                 <span class="menu-rating__tag">4.5</span>
                                 <div class="menu-rating__score-cap">
@@ -187,14 +187,14 @@
                         <button class="button button--normal">Vegetarian</button>
                         <button class="button button--normal button--price">$,$$
                             <div class="button__divide"></div>
-                            <button v-on:click="displayPrice('menu-price--sidebar')" class="button button--dropdown">v</button>
-                            <div class="menu-price menu-price--sidebar">
+                            <button v-on:click="displayRating(3)" class="button button--dropdown">v</button>
+                            <div class="menu-price menu-price--sidebar" v-if="subrating[3]">
                                 <span class="menu-price__tag">Menu price</span>
                                 <div class="menu-price__price-range">
-                                    <button v-on:click="togglePrice" class="button--price-range button--price-range-selected">$</button>
-                                    <button v-on:click="togglePrice" class="button--price-range button--price-range-selected">$$</button>
-                                    <button v-on:click="togglePrice" class="button--price-range">$$$</button>
-                                    <button v-on:click="togglePrice" class="button--price-range">$$$$</button>
+                                    <button v-on:click="togglePrice(0)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[0] }">$</button>
+                                    <button v-on:click="togglePrice(1)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[1] }">$$</button>
+                                    <button v-on:click="togglePrice(2)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[2] }">$$$</button>
+                                    <button v-on:click="togglePrice(3)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[3] }">$$$$</button>
                                 </div>
                                 <div class="menu-price__button">
                                     <button class="button button--normal button--cancel">Cancel</button>
@@ -207,144 +207,7 @@
             </div>
 
             <div class="dish-list">
-                <div class="dish">
-                    <a class="dish__link" href="">
-                        <img class="dish__image dish__image--first" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <img class="dish__image" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <div class="dish__info">
-                            <h3 class="dish__name">OhLaLa! French Toast</h3>
-                            <div class="dish__description">
-                                <span class="dish__price-tag-deliv-time">
-                                    <p class="dish__price">$$</p>
-                                    <p>•</p>
-                                    <p class="dish__tag">Sweets, Breakfast</p>
-                                    <p class="dish__deliv-time">30 min</p>
-                                </span>
-                                <span class="dish__star-rating-deliv-cost">
-                                    <p class="dish__star">3.7★</p>
-                                    <p class="dish__rating">33 ratings</p> 
-                                    <p class="dish__deliv-cost">Free delivery</p>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="dish">
-                    <a class="dish__link" href="">
-                        <img class="dish__image dish__image--first" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <img class="dish__image" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <div class="dish__info">
-                            <h3 class="dish__name">OhLaLa! French Toast</h3>
-                            <div class="dish__description">
-                                <span class="dish__price-tag-deliv-time">
-                                    <p class="dish__price">$$</p>
-                                    <p>•</p>
-                                    <p class="dish__tag">Sweets, Breakfast</p>
-                                    <p class="dish__deliv-time">30 min</p>
-                                </span>
-                                <span class="dish__star-rating-deliv-cost">
-                                    <p class="dish__star">3.7★</p>
-                                    <p class="dish__rating">33 ratings</p>
-                                    <p class="dish__deliv-cost">Free delivery</p>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="dish">
-                    <a class="dish__link" href="">
-                        <img class="dish__image dish__image--first" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <img class="dish__image" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <div class="dish__info">
-                            <h3 class="dish__name">OhLaLa! French Toast</h3>
-                            <div class="dish__description">
-                                <span class="dish__price-tag-deliv-time">
-                                    <p class="dish__price">$$</p>
-                                    <p>•</p>
-                                    <p class="dish__tag">Sweets, Breakfast</p>
-                                    <p class="dish__deliv-time">30 min</p>
-                                </span>
-                                <span class="dish__star-rating-deliv-cost">
-                                    <p class="dish__star">3.7★</p>
-                                    <p class="dish__rating">33 ratings</p>
-                                    <p class="dish__deliv-cost">Free delivery</p>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="dish">
-                    <a class="dish__link" href="">
-                        <img class="dish__image dish__image--first" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <img class="dish__image" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <div class="dish__info">
-                            <h3 class="dish__name">OhLaLa! French Toast</h3>
-                            <div class="dish__description">
-                                <span class="dish__price-tag-deliv-time">
-                                    <p class="dish__price">$$</p>
-                                    <p>•</p>
-                                    <p class="dish__tag">Sweets, Breakfast</p>
-                                    <p class="dish__deliv-time">30 min</p>
-                                </span>
-                                <span class="dish__star-rating-deliv-cost">
-                                    <p class="dish__star">3.7★</p>
-                                    <p class="dish__rating">33 ratings</p>
-                                    <p class="dish__deliv-cost">Free delivery</p>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="dish">
-                    <a class="dish__link" href="">
-                        <img class="dish__image dish__image--first" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <img class="dish__image" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <div class="dish__info">
-                            <h3 class="dish__name">OhLaLa! French Toast</h3>
-                            <div class="dish__description">
-                                <span class="dish__price-tag-deliv-time">
-                                    <p class="dish__price">$$</p>
-                                    <p>•</p>
-                                    <p class="dish__tag">Sweets, Breakfast</p>
-                                    <p class="dish__deliv-time">30 min</p>
-                                </span>
-                                <span class="dish__star-rating-deliv-cost">
-                                    <p class="dish__star">3.7★</p>
-                                    <p class="dish__rating">33 ratings</p>
-                                    <p class="dish__deliv-cost">Free delivery</p>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="dish">
-                    <a class="dish__link" href="">
-                        <img class="dish__image dish__image--first" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <img class="dish__image" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://cdn.doordash.com/media/photos%2Ff8c2b34d-ba56-40a0-91e3-a49041815b28-retina-large.jpg"/>
-                        <div class="dish__info">
-                            <h3 class="dish__name">OhLaLa! French Toast</h3>
-                            <div class="dish__description">
-                                <span class="dish__price-tag-deliv-time">
-                                    <p class="dish__price">$$</p>
-                                    <p>•</p>
-                                    <p class="dish__tag">Sweets, Breakfast</p>
-                                    <p class="dish__deliv-time">30 min</p>
-                                </span>
-                                <span class="dish__star-rating-deliv-cost">
-                                    <p class="dish__star">3.7★</p>
-                                    <p class="dish__rating">33 ratings</p>
-                                    <p class="dish__deliv-cost">Free delivery</p>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>  
-
+                <ListComponent/>
             </div>
         </div>
     </div>
@@ -353,53 +216,44 @@
 
 <script>
 import ItemCarousel from './Carousel'
+import ListComponent from "./ListComponent.vue"
 
 export default {
   name: 'Body',
   components: {
-    ItemCarousel
+    ItemCarousel,
+    ListComponent
   },
+  data: 
+    () => {
+        return {
+            displayIcon: [false, false, false, false, false, false],
+            seeMoreBtn: false,
+            seeMoreText: true,
+            subrating: [false, false,false,false],
+            inPriceRange: [true, true, false, false],
+            
+        }
+    },
   methods: {
     seeMore: function(){
-        let myBtn = document.getElementsByClassName("button--see-more")[0];
-        let hiddenIcons = document.getElementsByClassName("food-icon--see-more");
-
-        if (myBtn.textContent === "See Less ^"){
-            Array.from(hiddenIcons).forEach(icon => {
-                icon.style.display = "none";
-            })
-            myBtn.textContent = "See All v";
-        }
-        else if (myBtn.textContent === "See All v") {
-            Array.from(hiddenIcons).forEach(icon => {
-                icon.style.display = "inline";
-            })
-            myBtn.textContent = "See Less ^";
-        }
+        this.seeMoreBtn = !this.seeMoreBtn;
+        this.seeMoreText = !this.seeMoreText;
+        this.displayIcon = this.displayIcon.map((item)=> {
+            return !item;
+        })
     },
-    displayRating: function(tag){
-        let object = document.getElementsByClassName(tag)[0];
-        let display = window.getComputedStyle(object).display;
-        if (display === "none")
-            object.style.display = "flex";
-        else
-            object.style.display = "none";
+    displayRating: function(idx){
+        this.subrating = this.subrating.map((item, index)=> {
+            if (index!=idx) {
+                return false;
+            }
+            return !item;
+        })
     },
-    displayPrice: function(tag){
-        let object = document.getElementsByClassName(tag)[0];
-        let display = window.getComputedStyle(object).display;
-        if (display === "none") 
-            object.style.display = "flex";
-        else
-            object.style.display = "none";
-    },
-    togglePrice: function(){
-        let object = event.target;
-        let check = 'button--price-range-selected';
-        if (object.classList.contains(check))
-            object.classList.remove(check);
-        else
-            object.classList.add(check);
+    togglePrice: function(idx){
+        this.inPriceRange[idx] = !this.inPriceRange[idx];
+        this.inPriceRange = [...this.inPriceRange];
     }
   }
 }
@@ -494,54 +348,6 @@ p {
     width: 50px;
     height: 50px;
 }
-.food-icon--see-more {
-    display: none;
-}
-
-.dish-list {
-    margin-left: 10px;
-    flex: 66 1 0%;
-}
-.dish {
-    background: white;
-    margin-bottom: 20px;
-    padding: 10px 17px 0 17px;
-    box-shadow: 0 2px 16px #dadada;
-    border-radius: 5px;
-    width: fit-content;
-}
-.dish:hover {
-    box-shadow: 0px 2px 26px rgb(0 0 0 / 24%), 0px 2px 8px rgb(0 0 0 / 8%);
-    transition: 0.2s;
-}
-.dish__image {
-    width: 280px;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin: 18px 0 10px;
-}
-.dish__image--first {
-  margin-right: 30px;
-}
-.dish p {
-    display: inline-block;
-    padding-right: 5px;
-}
-.dish__info *  {
-    margin-block: 0;   
-}
-.dish__description {
-    color: grey;
-}
-.dish__deliv-time, .dish__deliv-cost { /*padding-right not overriding*/
-    padding-right: 0;
-    float: right;
-}
-.dish__star-rating-deliv-cost {
-    display: block;
-    padding: 5px 0 7px;
-}
 
 .button {
     width: fit-content;
@@ -590,7 +396,6 @@ p {
     box-shadow: 0 0 8px 2px #d3d3d3;
     z-index: 2;
     box-sizing: border-box;
-    display: none;
     flex-direction: column;
     white-space: nowrap;
     text-align: start;
@@ -646,7 +451,6 @@ p {
     box-shadow: 0 0 8px 2px #d3d3d3;
     z-index: 2;
     box-sizing: border-box;
-    display: none;
     flex-direction: column;
     white-space: nowrap;
     text-align: start;
@@ -657,6 +461,7 @@ p {
     left: -5px;
 }
 .menu-price--sidebar {
+    display: flex;
     bottom: 32px;
     left: -5px;
 }
