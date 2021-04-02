@@ -4,14 +4,18 @@
     <ItemCarousel/>
     <div class="body-header__button-list">
         <button class="button button--normal">Pickup</button>
-        <button class="button button--normal button--rating">Over 4.5 ★ 
+        <button class="button button--normal button--rating">Over 4.5<span class="button__icon button__icon--star material-icons-round">star</span> 
             <div class="button__divide"></div>
-            <button v-on:click="displayRating(0)" class="button button--dropdown">v</button>
-            <div class="menu-rating menu-rating--header" v-if="subrating[0]">
+            <button v-on:click="displayRating(0)" class="button button--dropdown">
+                <span class="button__icon button__icon--drop-down material-icons-outlined">expand_more</span>
+            </button>
+            <div class="menu-rating menu-rating--header" v-if="subrating[0]" v-click-outside="hide">
                 <div class="menu-rating__score">
                     <span class="menu-rating__tag">4.5</span>
                     <div class="menu-rating__score-cap">
-                        <p class="menu-rating__score-star">4.5 ★</p>
+                        <p class="menu-rating__score-number">4.5
+                            <span class="menu-rating__score-star button__icon button__icon--star material-icons-round">star</span>
+                        </p>
                         <span class="menu-rating__score-range">and over</span>
                     </div>
                 </div>
@@ -23,10 +27,12 @@
         </button>
         <button class="button button--normal">Under 30 min</button>
         <button class="button button--normal">Vegetarian</button>
-        <button class="button button--normal button--price">$,$$ 
+        <button class="button button--normal button--price">$,$$  
             <div class="button__divide"></div>
-            <button v-on:click="displayRating(1)" class="button button--dropdown">v</button>
-            <div class="menu-price menu-price--header" v-if="subrating[1]">
+            <button v-on:click="displayRating(1)" class="button button--dropdown">
+                <span class="button__icon button__icon--drop-down material-icons-outlined">expand_more</span>
+            </button>
+            <div class="menu-price menu-price--header" v-if="subrating[1]" v-click-outside="hide">
                 <span class="menu-price__tag">Menu price</span>
                 <div class="menu-price__price-range">
                     <button v-on:click="togglePrice(0)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[0] }">$</button>
@@ -160,20 +166,25 @@
                         </a>
                     </div>
                     <div class="sidebar__see-more">
-                        <button v-on:click="seeMore" class="button button--normal button--see-more">{{seeMoreText ? 'See All v' : 'See Less ^'}}</button>
+                        <button v-on:click="seeMore" v-if="seeMoreText" class="button button--normal button--see-more">See All<span class="button__icon button__icon--drop-down material-icons-outlined">expand_more</span></button>
+                        <button v-on:click="seeMore" v-else class="button button--normal button--see-more">See Less<span class="button__icon button__icon--drop-down material-icons-outlined">expand_less</span></button>
+                        
                     </div>
-                    
 
                     <div class="sidebar__button-list">
                         <button class="button button--normal">Pickup</button>
-                        <button class="button button--normal button--rating">Over 4.5 ★
+                        <button class="button button--normal button--rating">Over 4.5<span class="button__icon button__icon--star material-icons-round">star</span> 
                             <div class="button__divide"></div>
-                            <button v-on:click="displayRating(2)" class="button button--dropdown" >v</button>
-                            <div class="menu-rating menu-rating--sidebar" v-if="subrating[2]">
+                            <button v-on:click="displayRating(2)" class="button button--dropdown" >
+                                <span class="button__icon button__icon--drop-down material-icons-outlined">expand_more</span>
+                            </button>
+                            <div class="menu-rating menu-rating--sidebar" v-if="subrating[2]" v-click-outside="hide">
                                 <div class="menu-rating__score">
                                 <span class="menu-rating__tag">4.5</span>
                                 <div class="menu-rating__score-cap">
-                                    <p class="menu-rating__score-star">4.5 ★</p>
+                                    <p class="menu-rating__score-number">4.5
+                                        <span class="menu-rating__score-star button__icon button__icon--star material-icons-round">star</span> 
+                                    </p>
                                     <span class="menu-rating__score-range">and over</span>
                                 </div>
                             </div>
@@ -187,8 +198,8 @@
                         <button class="button button--normal">Vegetarian</button>
                         <button class="button button--normal button--price">$,$$
                             <div class="button__divide"></div>
-                            <button v-on:click="displayRating(3)" class="button button--dropdown">v</button>
-                            <div class="menu-price menu-price--sidebar" v-if="subrating[3]">
+                            <button v-on:click="displayRating(3)" class="button button--dropdown"><span class="button__icon button__icon--drop-down material-icons-outlined">expand_more</span></button>
+                            <div class="menu-price menu-price--sidebar" v-if="subrating[3]" v-click-outside="hide">
                                 <span class="menu-price__tag">Menu price</span>
                                 <div class="menu-price__price-range">
                                     <button v-on:click="togglePrice(0)" class="button--price-range" v-bind:class="{ 'button--price-range-selected': inPriceRange[0] }">$</button>
@@ -217,6 +228,7 @@
 <script>
 import ItemCarousel from './Carousel'
 import ListComponent from "./ListComponent.vue"
+import vClickOutside from 'v-click-outside'
 
 export default {
   name: 'Body',
@@ -254,7 +266,15 @@ export default {
     togglePrice: function(idx){
         this.inPriceRange[idx] = !this.inPriceRange[idx];
         this.inPriceRange = [...this.inPriceRange];
+    },
+    hide: function(){
+        this.subrating = this.subrating.map(()=> {
+            return false
+        })
     }
+  },
+  directives: {
+      clickOutside: vClickOutside.directive
   }
 }
 </script>
@@ -367,6 +387,7 @@ p {
     display: inline;
     border-left: 1px solid rgb(185, 185, 185);
     height: 16px;
+    width: 1px;
 }
 .button--normal {
     padding: 0 12px;
@@ -375,7 +396,7 @@ p {
     margin: 0 15px 10px 0;
 }
 .button--dropdown {
-    padding: 0  5px 0 10px;
+    padding: 0;
     background-color: transparent;
 }
 .button--see-more {
@@ -385,6 +406,16 @@ p {
 }
 .button--rating, .button--price {
     position: relative;
+}
+
+.button__icon {
+    font-size: 14px;
+}
+.button__icon--star {
+    padding: 0 6px;
+}
+.button__icon--drop-down {
+    padding-left: 8px;
 }
 
 .menu-rating {
@@ -417,9 +448,13 @@ p {
     align-items: center;
     margin-bottom: 97px;
 }
-.menu-rating__score-star {
+.menu-rating__score-number {
     font-size: 175%;
     margin: 5px 0 10px;
+}
+.menu-rating__score-star {
+    padding: 0;
+    font-size: 100%;
 }
 .menu-rating__score-range {
     font-size: 75%;
@@ -492,4 +527,6 @@ p {
     display: flex;
     justify-content: flex-end;
 }
+
+
 </style>

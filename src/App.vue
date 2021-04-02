@@ -13,6 +13,7 @@
 import Header from './components/Header'
 import Body from './components/Body'
 
+
 export default {
   name: 'App',
   components: {
@@ -24,6 +25,8 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
+
 * {
   margin:0;
 }
