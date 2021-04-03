@@ -21,7 +21,6 @@ export default {
 
         const loadMorePosts = () => {
 			let newPosts = getPosts(10)
-			console.log(newPosts)
 			posts.value.push(...newPosts)
 		}
 

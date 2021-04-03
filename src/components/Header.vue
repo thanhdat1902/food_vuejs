@@ -1,6 +1,7 @@
 <template>
   <div id="header" >
-    <div v-bind:class="{'header__container--onscroll': isScroll }" class=" nav--max-height header__container">
+    <div class=" nav--max-height header__container" 
+    v-bind:class="{'header__container--onscroll': isScroll }">
       <div class="nav--max-height nav-container">
       <!-- Begin nav-list -->
         <div class="nav--max-height nav">
@@ -79,25 +80,28 @@
       </div>
     </div>
     <div class="header__banner-area">
-      <h1 class="header__banner">Menu</h1>
+      <h1 class="header__banner">{{boolTest(isScroll)}}</h1>
+      <button type="button" v-on:click="onpress"></button>
     </div>
   </div>
+
 </template>
 
 <script>
-import {ref,onMounted, onUnmounted} from "@vue/composition-api"
+import {ref, onMounted, onUnmounted} from "@vue/composition-api"
 export default {
   name: 'Header',
   setup(){
-    let isScroll = ref(false);
+    const isScroll = ref(false)
     const handleSrcoll = () =>{
       let top = window.scrollY;
       if(top > 250){
-        isScroll = true;
+        isScroll.value = true;
       }
       else{
-        isScroll = false;
+        isScroll.value = false;
       }
+      console.log(isScroll.value)
     }
 
     onMounted (() => {
@@ -113,13 +117,17 @@ export default {
     }
   },
 
-  mounted(){
-    return this.isScroll
-  },
-
   methods: {
+    onpress(){
+      console.log(this.isScroll)
+      console.log("reached")
+    },
 
-
+    boolTest(b){
+      if (b == false) return "Menu"
+      else if (b == true) return "Not menu"
+      else return "Undefined"
+    }
   }
 }
 </script>
