@@ -1,33 +1,37 @@
 <template>
   <div id="app">
     <Header />
-    <HelloWorld msg="Hoc viec"/>
-    <ItemCarousel/>
+    <Body />
+    <!-- <HelloWorld msg="Hoc viec"/> -->
+    
   </div>
 
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header'
-import ItemCarousel from './components/Carousel'
+import Body from './components/Body'
+
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    // HelloWorld,
     Header,
-    ItemCarousel
+    Body,
   }
 }
 </script>
 
 <style>
+* {
+  margin:0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

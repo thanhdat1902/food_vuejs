@@ -1,6 +1,6 @@
 <template>
   <div id="header" >
-    <div v-bind:class="{'header__container--onscroll': isScroll}" class=" nav--max-height header__container">
+    <div v-bind:class="{'header__container--onscroll': isScroll }" class=" nav--max-height header__container">
       <div class="nav--max-height nav-container">
       <!-- Begin nav-list -->
         <div class="nav--max-height nav">
@@ -98,7 +98,6 @@ export default {
       else{
         isScroll = false;
       }
-      console.log(isScroll);
     }
 
     onMounted (() => {
@@ -197,6 +196,7 @@ html{
   padding-top: 140px;
   min-height: 540px;
 }
+/* End scrolling-animation */
 
 /* Start  nav-container*/
 #header .nav-container{
