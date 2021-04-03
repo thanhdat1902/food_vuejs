@@ -41,8 +41,8 @@ export default {
 		})
         return {
 			posts,
-			scrollComponent
+			scrollComponent,
 		}
-    }
+    },
 }
 </script>
