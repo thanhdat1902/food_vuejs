@@ -1,6 +1,6 @@
 <template>
   <div id="header" >
-    <div class=" nav--max-height header__container">
+    <div v-bind:class="{'header__container--onscroll': isScroll}" class=" nav--max-height header__container">
       <div class="nav--max-height nav-container">
       <!-- Begin nav-list -->
         <div class="nav--max-height nav">
@@ -85,34 +85,39 @@
 </template>
 
 <script>
-import {onMounted, onUnmounted} from "@vue/composition-api"
+import {ref,onMounted, onUnmounted} from "@vue/composition-api"
 export default {
   name: 'Header',
   setup(){
+    let isScroll = ref(false);
     const handleSrcoll = () =>{
-      let object = document.getElementsByClassName("nav--max-height");
-      let container = document.querySelector(".header__container");
-      let banner = document.querySelector(".header__banner-area");
       let top = window.scrollY;
       if(top > 250){
-        object.forEach(navElement => {
-          navElement.style.maxHeight = "100px";
-        })
-        container.style.position = "fixed";
-        container.style.backgroundColor = "#000";
-        banner.style.paddingTop = "140px";
-        banner.style.minHeight = "540px";
+        isScroll = true;
       }
+      else{
+        isScroll = false;
+      }
+      console.log(isScroll);
     }
 
-  onMounted (() => {
-    window.addEventListener('scroll', handleSrcoll);
-  })
+    onMounted (() => {
+      window.addEventListener('scroll', handleSrcoll);
+    })
 
-  onUnmounted (() => {
-    window.removeEventListener('scroll', handleSrcoll);
-  })
+    onUnmounted (() => {
+      window.removeEventListener('scroll', handleSrcoll);
+    })
+
+    return{
+      isScroll
+    }
   },
+
+  mounted(){
+    return this.isScroll
+  },
+
   methods: {
 
 
@@ -155,6 +160,7 @@ html{
   z-index: 1000;
 }
 
+
 #header .header__container::after{
   position: absolute;
   content: "";
@@ -166,6 +172,30 @@ html{
   top: 0;
   bottom: 0;
   margin: auto;
+}
+
+/* Start scrolling-animation */
+@keyframes fadeInDown {
+   0% {
+      opacity: 0;
+      transform: translateY(-20px);
+   }
+   100% {
+      opacity: 1;
+      transform: translateY(0);
+      background-color: #000;
+   }
+} 
+
+.header__container--onscroll{
+  animation: fadeInDown 2s ease;
+  background-color: #000;
+  position: fixed;
+}
+
+.banner--onscroll{
+  padding-top: 140px;
+  min-height: 540px;
 }
 
 /* Start  nav-container*/
@@ -180,7 +210,7 @@ html{
 
 /* Start nav-list */
 .nav{
-  max-width: 41.666667%;
+  min-width: 41.666667%;
   display: flex;
 }
 
@@ -306,9 +336,9 @@ html{
 /* End nav-list */
 
 /* Start nav-image */
+
 #header .nav-container .nav-container__image{
   text-align: center;
-  margin-left: 32px;
 }
 /* End nav-image */
 
