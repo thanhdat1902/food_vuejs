@@ -1,9 +1,9 @@
 <template>
   <div id="header" >
-    <div v-bind:class="{'header__container--onscroll': isScroll }" class=" nav--max-height header__container">
-      <div class="nav--max-height nav-container">
+    <div v-bind:class="{'header__container--onscroll': isScroll,'cotainer--max-height-scroll': isScroll}" class=" nav--max-height header__container">
+      <div v-bind:class="{'cotainer--max-height-scroll': isScroll}" class="nav--max-height nav-container">
       <!-- Begin nav-list -->
-        <div class="nav--max-height nav">
+        <div v-bind:class="{'cotainer--max-height-scroll': isScroll}" class="nav--max-height nav">
           <ul class="nav--max-height nav__list">
             <li >
               <a href="#">
@@ -60,7 +60,7 @@
             <img src="../assets/headerImg/logo.png" alt="Hamburger">
           </a>
         </div>
-        <div class="nav--max-height nav__order">
+        <div v-bind:class="{'cotainer--max-height-scroll': isScroll}" class="nav--max-height nav__order">
           <div class="nav__order-button">
             <a href="#">Order online</a>
           </div>
@@ -78,48 +78,39 @@
         </div>
       </div>
     </div>
-    <div class="header__banner-area">
+    <div v-bind:class="{'banner--onscroll': isScroll}" class="header__banner-area">
       <h1 class="header__banner">Menu</h1>
     </div>
   </div>
+  
 </template>
 
 <script>
-import {ref,onMounted, onUnmounted} from "@vue/composition-api"
 export default {
   name: 'Header',
-  setup(){
-    let isScroll = ref(false);
-    const handleSrcoll = () =>{
+  data: function(){
+    return {
+      isScroll: false
+    }
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    handleScroll (){
       let top = window.scrollY;
       if(top > 250){
-        isScroll = true;
+        this.isScroll = true;
       }
       else{
-        isScroll = false;
+        this.isScroll = false;
       }
+      console.log(top);
+      console.log(this.isScroll);
     }
-
-    onMounted (() => {
-      window.addEventListener('scroll', handleSrcoll);
-    })
-
-    onUnmounted (() => {
-      window.removeEventListener('scroll', handleSrcoll);
-    })
-
-    return{
-      isScroll
-    }
-  },
-
-  mounted(){
-    return this.isScroll
-  },
-
-  methods: {
-
-
   }
 }
 </script>
@@ -187,14 +178,18 @@ html{
 } 
 
 .header__container--onscroll{
+  position: fixed !important;
   animation: fadeInDown 2s ease;
   background-color: #000;
-  position: fixed;
+}
+
+.cotainer--max-height-scroll{
+  max-height: 100px;
 }
 
 .banner--onscroll{
+  min-height: 540px !important;
   padding-top: 140px;
-  min-height: 540px;
 }
 /* End scrolling-animation */
 
