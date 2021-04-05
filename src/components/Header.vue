@@ -446,7 +446,7 @@ html{
 /* End nav-container */
 
 /* Start banner */
-#header .header__banner-area{
+.header__banner-area{
   min-height: 400px;
   display: flex;
   align-content:  center;
