@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
+    <Footer />
     <Body />
+    
     <!-- <HelloWorld msg="Hoc viec"/> -->
     
   </div>
@@ -12,11 +14,12 @@
 // import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header'
 import Body from './components/Body'
-
+import Footer from './components/Footer'
 export default {
   name: 'App',
   components: {
     // HelloWorld,
+    Footer,
     Header,
     Body,
   }
