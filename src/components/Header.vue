@@ -1,6 +1,6 @@
 <template>
   <div id="header" >
-    <div v-bind:class="{'header__container--onscroll': isScroll,'cotainer--max-height-scroll': isScroll}" class=" nav--max-height header__container">
+    <div v-bind:class="classObject" class=" nav--max-height header__container">
       <div v-bind:class="{'cotainer--max-height-scroll': isScroll}" class="nav--max-height nav-container">
       <!-- Begin nav-list -->
         <div v-bind:class="{'cotainer--max-height-scroll': isScroll}" class="nav--max-height nav">
@@ -93,6 +93,16 @@ export default {
       isScroll: false
     }
   },
+  computed:{
+  classObject: function () {
+    return {
+      'header__container--onscroll': this.isScroll,
+      'cotainer--max-height-scroll': this.isScroll,
+      'header__container--scroll-top': !this.isScroll
+    }
+  }
+  },
+
   created () {
     window.addEventListener('scroll', this.handleScroll);
   },
@@ -108,8 +118,6 @@ export default {
       else{
         this.isScroll = false;
       }
-      console.log(top);
-      console.log(this.isScroll);
     }
   }
 }
@@ -144,6 +152,9 @@ html{
   width: 100%;
 }
 
+
+
+
 #header .header__container{
   position: relative;
   min-width: 100%;
@@ -177,18 +188,33 @@ html{
    }
 } 
 
-.header__container--onscroll{
-  position: fixed !important;
-  animation: fadeInDown 2s ease;
+@keyframes fadeIn {
+   0% {
+      opacity: 0;
+      background-color: #000 ;
+   }
+   100% {
+      opacity: 1;
+   }
+} 
+#header .header__container--scroll-top{
+  animation: fadeIn 1s ease;
+  min-height: 140px;
+}
+
+
+#header .header__container--onscroll{
+  position: fixed ;
+  animation: fadeInDown 1s ease;
   background-color: #000;
 }
 
-.cotainer--max-height-scroll{
+#header .cotainer--max-height-scroll{
   max-height: 100px;
 }
 
-.banner--onscroll{
-  min-height: 540px !important;
+#header .banner--onscroll{
+  min-height: 540px;
   padding-top: 140px;
 }
 /* End scrolling-animation */
