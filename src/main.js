@@ -6,9 +6,7 @@ import router from './router'
 Vue.use(VueCompositionAPI)
 //If you not install the Vue Composition API, please
 //commented out above import and use statement, 
-//or proceed to https://www.npmjs.com/package/@vue/composition-api
-//to install, but please install to use the Infinity List feature that
-//yauangon has just install
+//or proceed to https://www.npmjs.com/package/@vue/composition-api to install
 
 Vue.config.productionTip = false
 

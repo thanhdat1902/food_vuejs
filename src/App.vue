@@ -2,30 +2,17 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      <div id="app">
-        <Header />
-        <Footer />
-        <Body />
-      </div>
-
+      <router-link to="/about">About</router-link> | 
+      <router-link to="/restaurant/:id">Restaurant</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import Header from './components/Header'
-import Body from './components/Body'
-import Footer from './components/Footer'
 export default {
   name: 'App',
   components: {
-    // HelloWorld,
-    Footer,
-    Header,
-    Body,
   }
 }
 </script>
@@ -40,8 +27,6 @@ export default {
 }
 
 #nav {
-  padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
