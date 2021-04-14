@@ -1,0 +1,3 @@
+After vue-router is added, plz note that scss in <style> tag in Vue.app require sass-loader@10.1.1 to be install. 
+Higher version of this plugin does seem to be not working with vue2
+install command: yarn add sass-loader@10.1.1
