@@ -20,11 +20,12 @@ const routes = [
   },
   {
     path: "/restaurant",
-    name: "Restaurant"
+    name: "Restaurant",
+    component: () => import("../views/resTemplate.vue")
   },
   {
     path: "/restaurant/:id",
-    name: "Restaurant Id",
+    name: "Restaurant ID",
     component: () => import( '../views/resTemplate.vue')
   }
 ]
