@@ -10,7 +10,23 @@
         <div class="name-container">
            <h1>{{$route.params.id}}</h1> 
         </div>
-        
+        <div class="text-above">
+            <h1> Chick-fil-A </h1>
+            <pre> DashPass . Chicken sandwiches, nuggets
+    4.7 (stars) (13,600+ ratings) . 7785.9 mi . $
+            </pre>
+        </div>
+        <div class="set-height">
+            <div class="text-inside">
+                <p> <strong> $0.00 </strong> </p>
+                <p> delivery free </p>
+            </div>
+            <div class="box-inside">
+                <p> <strong> Unavailable</strong> </p>
+                <p> too far away i</p>
+            </div>
+        </div>
+        <br><br><br><br><br><br>
         <h1>Body</h1>
     </div>
 </div>
@@ -26,6 +42,31 @@ export default {
 </script>
 
 <style scoped>
+.set-height{
+    position: absolute;
+    width: 30%;
+    height: 105px;
+    border-style: solid;
+    border-radius: 20px;
+}
+.text-inside{
+    position: relative;
+    width: 30%;
+    left: 10%;
+}
+.box-inside{
+    position: relative;
+    width: 40%;
+    top: -75%;
+    left: 55%;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 10%;
+}
+.text-above{
+    text-align: left;
+}
+
 
 img{
     max-width: 100%;
