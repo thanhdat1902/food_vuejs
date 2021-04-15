@@ -21,7 +21,8 @@ const routes = [
   {
     path: "/restaurant",
     name: "Restaurant",
-    component: () => import("../views/resTemplate.vue")
+    component: () => import("../views/resTemplate.vue") 
+    // need to be another page, will be addressing later
   },
   {
     path: "/restaurant/:id",
