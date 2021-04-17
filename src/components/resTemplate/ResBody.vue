@@ -27,6 +27,41 @@
             </div>
         </div>
         <br><br><br><br><br><br>
+
+        <div class="yellow-box">
+            <p>Enter your address </p>
+            <p>We'll confirm that you can have this restaurant delivered </p>
+            <input type="text" name="address" placeholder="Address" />
+        </div>
+        <p> Local restaurants delivered in 45 minutes </p>
+        <hr>
+        
+        <div class="align-left"> 
+            <p> <strong> All day </strong> </p>
+            <p> 10:00 am - 9:30 pm </p>
+        </div>
+
+        <div class="justify-content">
+            <a href="#pop"> Popular Items </a>
+            <a href="#build"> Build your own Family Meal </a>
+            <a href="#entree"> Entrees </a>
+            <a href="#side"> Sides </a>
+            <a href="#beverages"> Beverages </a>
+            <a href="#salad"> Salad </a>
+            <a href="#treat"> Treat </a>
+            <a href="#sauce"> 8oz Sauces </a>
+        </div>    
+        <div class="list-food">
+            <h2 id="pop"> Popular Items </h2>
+            <p> The most commonly ordered items and dishes from this store </p>
+            <h2 id="build"> Build your own Family Meal </h2>
+            <h2 id="entree"> Entrees </h2>
+            <h2 id="side"> Sides </h2>
+            <h2 id="beverages"> Beverages </h2>
+            <h2 id="salad"> Salad </h2>
+            <h2 id="treat"> Treat </h2>
+            <h2 id="sauce"> 8oz Sauces </h2>
+        </div>
         <h1>Body</h1>
     </div>
 </div>
@@ -42,6 +77,24 @@ export default {
 </script>
 
 <style scoped>
+.h2{
+    text-align: left;
+}
+.justify-content{
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
+.align-left{
+    text-align: left;
+}
+
+.yellow-box{
+    border-style: solid;
+    background-color: yellow;
+    border-radius: 5px;
+    padding-bottom: 20px;
+}
 .set-height{
     position: absolute;
     width: 30%;
@@ -53,6 +106,7 @@ export default {
     position: relative;
     width: 30%;
     left: 10%;
+
 }
 .box-inside{
     position: relative;
@@ -62,6 +116,8 @@ export default {
     border-style: solid;
     border-radius: 10px;
     border-width: 10%;
+    background-color: #920000;
+    color: white;
 }
 .text-above{
     text-align: left;
